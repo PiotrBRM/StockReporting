@@ -12,6 +12,10 @@ dist
 dist-ssr
 *.local
 
+# Local sample data (contains real catalog/stock data)
+AMPEDExample.xlsx
+ProperExample.csv
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
