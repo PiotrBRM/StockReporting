@@ -23,6 +23,16 @@ const EXCLUDED_ARTISTS = ["DE LA SOUL", "THE MARSHALL TUCKER BAND", "THE COOL KI
 
 const FIXED_STOCK_THRESHOLD = 300;
 
+// Baked in at build time (see vite.config.ts) so it reflects when this
+// deploy was actually built, not the viewer's current date.
+const BUILD_DATE = new Date(__BUILD_DATE__);
+const FORMATTED_BUILD_DATE = `${String(BUILD_DATE.getDate()).padStart(2, "0")}/${String(
+  BUILD_DATE.getMonth() + 1
+).padStart(2, "0")}/${BUILD_DATE.getFullYear()} ${String(BUILD_DATE.getHours()).padStart(
+  2,
+  "0"
+)}:${String(BUILD_DATE.getMinutes()).padStart(2, "0")}`;
+
 export default function StockConsolidator() {
   const [source1Data, setSource1Data] = useState<any[]>([]); // Proper CSV
   const [source2Data, setSource2Data] = useState<any[]>([]); // AMPED XLSX
@@ -403,6 +413,11 @@ export default function StockConsolidator() {
     <div className={`${theme === "dark" ? "dark" : ""} relative min-h-screen overflow-hidden`}>
       {/* background */}
       <div className="fixed inset-0 -z-10 bg-gradient-to-br from-indigo-900 via-purple-800 to-pink-700" />
+
+      {/* version / build stamp */}
+      <div className="fixed bottom-2 right-3 z-50 text-[11px] text-white/40 select-none pointer-events-none">
+        Version {__APP_VERSION__} — Last updated on: {FORMATTED_BUILD_DATE}
+      </div>
 
       <div className="relative min-h-screen p-8">
         <div className="max-w-7xl mx-auto">
